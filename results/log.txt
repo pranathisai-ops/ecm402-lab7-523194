@@ -1,0 +1,114 @@
+==================== PART A: ICA / BSS ====================
+[A1] cond(A) = 9.854, det(A) = 1.000
+[A2] cov(X_w) =
+[[ 1. -0. -0.]
+ [-0.  1. -0.]
+ [-0. -0.  1.]]
+     max |cov - I| = 1.33e-14
+[A3] |corr| matrix (rows=true, cols=ICA):
+[[0.0001 0.9998 0.0223]
+ [0.0148 0.0182 0.9997]
+ [0.9996 0.0295 0.0011]]
+     matching true->ICA comp: {'sine': 1, 'square': 2, 'sawtooth': 0}
+     matched |corr| = [0.9998 0.9997 0.9996]  mean = 0.9997  (n_iter=7)
+[A4a] PCA |corr| matrix:
+[[0.542  0.62   0.5673]
+ [0.6708 0.7117 0.2084]
+ [0.5265 0.2388 0.8159]]
+      matched = [0.62   0.6708 0.8159] mean = 0.7023   (ICA mean = 0.9997)
+[A4b] cov(PCA outputs) =
+[[10.2419 -0.     -0.    ]
+ [-0.      0.9152 -0.    ]
+ [-0.     -0.      0.1066]]
+      cov(ICA outputs) =
+[[ 1.0005  0.      0.    ]
+ [ 0.      1.0005 -0.    ]
+ [ 0.     -0.      1.0005]]
+[A4c] D (PCA) =
+[[ 0.9082 -0.5732 -0.2651]
+ [-0.5732  1.7099 -0.5104]
+ [-0.2651 -0.5104  1.5215]]
+      D (ICA) =
+[[0.811  0.0139 0.008 ]
+ [0.0139 0.5229 0.0155]
+ [0.008  0.0155 0.0337]]
+      mean |off-diag D|: PCA = 0.4496, ICA = 0.0124
+[A5a] random-rotation baseline (200 rotations): mean=0.8274, 5th=0.7010, 95th=0.9509
+[A5b] FastICA on Gaussian mixtures: matched = [0.861  0.7324 0.8271], mean = 0.8068; warnings: none
+      FastICA on illustrative signals (A3): mean = 0.9997
+[A5d] excess kurtosis: illustrative = [-1.4791 -1.9681 -1.1915], Gaussian = [-0.0457  0.0818  0.1111]
+
+==================== PART B: PCA (modulation dataset, 20 dB) ====================
+[B6] EVR = [5.738e-01 2.313e-01 1.021e-01 3.310e-02 2.480e-02 1.810e-02 1.660e-02
+ 2.000e-04 0.000e+00 0.000e+00 0.000e+00 0.000e+00]
+     cumulative = [0.5738 0.8051 0.9071 0.9402 0.965  0.9832 0.9998 1.     1.     1.
+ 1.     1.    ]
+     components for 90% = 3, for 95% = 5
+[B7] reconstruction MSE:
+ q  MSE_measured  MSE_predicted    abs_diff
+ 1       4.68805        4.68805 1.77636e-15
+ 2       2.14424        2.14424 8.88178e-16
+ 3        1.0215         1.0215 4.44089e-16
+ 4      0.657865       0.657865 7.77156e-16
+ 5      0.384658       0.384658 4.44089e-16
+ 6      0.185291       0.185291 7.49401e-16
+ 7    0.00240111     0.00240111 6.02383e-16
+ 8   0.000102937    0.000102937 9.84523e-16
+ 9   3.77003e-27    6.48745e-16 6.48745e-16
+10   1.29378e-27              0 1.29378e-27
+11   1.17325e-27              0 1.17325e-27
+12   8.16281e-30              0 8.16281e-30
+[B8] top |loadings| on PC1:
+    feature  PC1_loading
+      |C42|     0.386329
+|C42|/C21^2     0.386329
+      |C20|     0.351873
+      |C40|     0.321595
+|C40|/C21^2     0.321595
+     centroid separation / mean within-class std (2-D): {'BPSK-QPSK': 12.628666426133552, 'BPSK-8PSK': 15.366583516048063, 'BPSK-16QAM': 23.2597514253141, 'QPSK-8PSK': 3.924025368668898, 'QPSK-16QAM': 16.331120848363447, '8PSK-16QAM': 15.755754066516268}
+
+==================== PART C: k-means ====================
+[C9a,b] k=4: inertia=2088.20, silhouette=0.4802, ARI=0.9973, NMI=0.9953  (ARI/NMI: labels used for evaluation only)
+[C9c] contingency table:
+cluster       0    1    2    3
+true class                    
+BPSK          0  249    0    1
+QPSK          0    0    0  250
+8PSK        250    0    0    0
+16QAM         0    0  250    0
+[C9d] ARI of 500 random 4-way assignments: mean=-0.00008, std=0.00135, min=-0.0028, max=0.0042
+[C10] k sweep (select k from inertia/silhouette ONLY; ARI shown for evaluation):
+ k   inertia  silhouette    ARI    NMI
+ 2 5581.4175      0.5087 0.3327 0.5772
+ 3 2531.8993      0.5884 0.7137 0.8571
+ 4 2088.2012      0.4802 0.9973 0.9953
+ 5 1868.3632      0.4668 0.8772 0.8980
+ 6 1671.9706      0.3991 0.7858 0.8501
+ 7 1505.6517      0.3904 0.7111 0.8362
+ 8 1352.6947      0.3944 0.6991 0.8320
+     k with max silhouette = 3;  k with max ARI = 4
+[C11]
+   representation  silhouette    ARI    NMI
+12-D standardized      0.4802 0.9973 0.9953
+          2-D PCA      0.7439 0.9867 0.9805
+[C12]
+ snr_db    ARI    NMI  silhouette  supervised_acc
+     20 0.9973 0.9953      0.4802          1.0000
+     15 1.0000 1.0000      0.4503          1.0000
+     10 1.0000 1.0000      0.3871          1.0000
+      5 0.6297 0.7709      0.3519          0.9867
+      0 0.3462 0.4092      0.2049          0.6700
+
+==================== PART D: alternatives ====================
+[D13] single run, 20 dB, dataset seed 0, algo seed 0 (GMM n_init=5, ward linkage):
+              method    ARI    NMI
+              KMeans 0.9973 0.9953
+          GMM (full) 1.0000 1.0000
+Agglomerative (ward) 1.0000 1.0000
+     warnings: none
+[D13+] mean +/- std over 10 independent datasets (seeds 100..109):
+              method  ARI_mean  ARI_std  NMI_mean  NMI_std
+              KMeans    1.0000   0.0000    1.0000   0.0000
+          GMM (full)    0.9685   0.0945    0.9777   0.0670
+Agglomerative (ward)    0.9822   0.0489    0.9862   0.0349
+[D14] moons: k-means ARI=0.2566, spectral ARI=1.0000 (labels used for ARI only); warnings: ['Graph is not fully connected, spectral embedding may not work as expected.']
