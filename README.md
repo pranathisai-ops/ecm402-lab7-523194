@@ -26,12 +26,5 @@ CPU only; whole pipeline takes about a minute. No datasets are committed - every
 FastICA `random_state=0` | dataset `seed=0` | KMeans `random_state=0, n_init=10` |
 GMM/Spectral `random_state=0` (GMM `n_init=5`) | Agglomerative `linkage="ward"` | D13 repeat study: dataset seeds 100-109.
 
-## Label discipline
-Ground-truth labels are used **only** for colouring plots and for ARI/NMI/contingency evaluation.
-They are never passed to any `fit()` and never used to choose k or the number of components
-(k is chosen from inertia/silhouette; ARI is reported afterwards).
-
 ## Notes
 * Dataset used: the synthetic modulation dataset (not `load_digits`).
-* The Lab-3 results were not available, so the supervised curve in C12 is an RBF-SVM on the same features
-  (70/30 stratified split) used as a stand-in.
